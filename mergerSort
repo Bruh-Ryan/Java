@@ -2,108 +2,106 @@ import java.util.Scanner;
 
 public class Mainee {
 
-    public void display(int[] arr)
-    {
-        for(int i:arr)
-        {
-            System.out.print("| "+i+" |");
+    // Method to display the array
+    public void display(int[] arr) {
+        for (int i : arr) {
+            System.out.print("| " + i + " |");
         }
-        System.out.println(" ");
+        System.out.println();
     }
 
-    public void merge(int []arr) // waht i did here is i am just providing variables to sort
-    {
-        int left=0;
-        int right=arr.length-1;
-        sort(left,right,arr);
-
+    // Method to initiate the merge sort
+    public void merge(int[] arr) {
+        int left = 0;
+        int right = arr.length - 1; // Corrected boundary
+        sort(left, right, arr);
     }
 
-    public static void sort(int left, int right, int[] arr)// in sort what is happening is that i am using all the variables and arr to find mid,left,right;
-    {
-        if(left<right)
-        {
-            int mid=(left+right)/2;
+    // Recursive method to divide the array
+    public static void sort(int left, int right, int[] arr) {
+        if (left < right) {
+            int mid = (left + right) / 2;
 
-            sort(left,mid,arr);
-            sort(mid+1,right,arr); 
-            mergesort(arr,left,mid,right);
+            // Sort the left and right halves
+            sort(left, mid, arr);
+            sort(mid + 1, right, arr);
+
+            // Merge the sorted halves
+            mergesort(arr, left, mid, right);
         }
     }
 
-    public static void mergesort(int[]arr,int left,int mid,int right)// here is what the actual merge sort is happening;
-    {
-        int leftsize=mid-left+1;
-        int leftArr[]=new int[leftsize];// left would be left minus right   
-    
-        int rightsize=right-mid;
-        int rightArr[]=new int[rightsize];// here is what right minus (mid+1)
+    // Method to merge two sorted subarrays
+    public static void mergesort(int[] arr, int left, int mid, int right) {
+        // Sizes of temporary subarrays
+        int leftSize = mid - left + 1;
+        int rightSize = right - mid;
 
-        for(int i=0;i<leftsize;i++)// copying left code to left arr after breaking
-        {
-            leftArr[i]=leftArr[i+left];
+        // Temporary arrays
+        int[] leftArr = new int[leftSize];
+        int[] rightArr = new int[rightSize];
+
+        // Copy data to temporary arrays
+        for (int i = 0; i < leftSize; i++) {
+            leftArr[i] = arr[left + i];
+        }
+        for (int i = 0; i < rightSize; i++) {
+            rightArr[i] = arr[mid + 1 + i];
         }
 
-        for(int i=0;i<rightsize;i++)// copying right split after breaking
-        {
-            rightArr[i]=rightArr[mid-right+1];
-        }
-
-        int i=0; 
-        int j=0;
-        int k=left;
-        while(i<leftsize && j<rightsize)
-        {
-            if(leftArr[i]<=rightArr[j])
-            {
-                arr[k]=leftArr[j];
+        // Merge the arrays
+        int i = 0, j = 0, k = left;
+        while (i < leftSize && j < rightSize) {
+            if (leftArr[i] <= rightArr[j]) {
+                arr[k] = leftArr[i];
                 i++;
-            }
-            else
-            {
-                arr[k]=rightArr[j];
+            } else {
+                arr[k] = rightArr[j];
                 j++;
             }
             k++;
-                  // Copy remaining elements of leftArr
-        while (i < leftsize) {
+        }
+
+        // Copy remaining elements of leftArr
+        while (i < leftSize) {
             arr[k] = leftArr[i];
             i++;
             k++;
         }
 
         // Copy remaining elements of rightArr
-        while (j < rightsize) {
+        while (j < rightSize) {
             arr[k] = rightArr[j];
             j++;
             k++;
         }
     }
 
-
-
-    }
-
+    // Main method
     public static void main(String[] args) {
-      
-        System.out.println("enter array size");
-        Scanner scan= new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
-        int size=scan.nextInt();
-        int arr[]=new int[size];
+        // Input array size
+        System.out.println("Enter array size:");
+        int size = scan.nextInt();
 
-        System.out.print("enter array elements");
-        for(int i=0;i<=size-1;i++)
-        {
-            arr[i]=scan.nextInt();
+        // Input array elements
+        int[] arr = new int[size];
+        System.out.println("Enter array elements:");
+        for (int i = 0; i < size; i++) {
+            arr[i] = scan.nextInt();
         }
-        
+
+        // Create an object and sort the array
         Mainee obj = new Mainee();
+        System.out.println("Original array:");
         obj.display(arr);
+
         obj.merge(arr);
 
+        System.out.println("Sorted array:");
+        obj.display(arr);
 
         scan.close();
     }
-    
 }
