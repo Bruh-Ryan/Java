@@ -11,7 +11,7 @@ public class Mainee {
         System.out.println(" ");
     }
 
-    public int merge(int []arr)
+    public int merge(int []arr) // waht i did here is i am just providing variables to sort
     {
         int left=0;
         int right=arr.lenght;
@@ -19,7 +19,7 @@ public class Mainee {
 
     }
 
-    public static void sort(int left, int right, int[] arr)
+    public static void sort(int left, int right, int[] arr)// in sort what is happening is that i am using all the variables and arr to find mid,left,right;
     {
         if(left<right)
         {
@@ -31,10 +31,27 @@ public class Mainee {
         }
     }
 
-    public static void mergesort(int[]arr,int left,int mid,int right)
+    public static void mergesort(int[]arr,int left,int mid,int right)// here is what the actual merge sort is happening;
     {
-        int leftArr[]=new int[mid-left];
-        int rightArr[]=new int[mid-right];
+        int leftArr[]=new int[mid-left];// left would be left minus right   
+    
+        int rightArr[]=new int[right-mid+1];// here is what right minus (mid+1)
+
+        for(int i=0;i<leftArr.lenght;i++)
+        {
+            leftArr[i]=leftArr[i+left];
+        }
+
+        for(int i=0;i<rightArr.lenght;i++)
+        {
+            rightArr[i]=rightArr[left-right+1];
+        }
+
+        int i=0; 
+        int j=0;
+        int k=0;
+        
+
 
     }
 
