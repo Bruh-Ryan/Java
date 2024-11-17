@@ -1,2 +1,64 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+
+import java.util.Scanner;
+
+public class Mainee {
+
+    public void display(int[] arr)
+    {
+        for(int i:arr)
+        {
+            System.out.print("| "+i+" |");
+        }
+        System.out.println(" ");
+    }
+
+    public int merge(int []arr)
+    {
+        int left=0;
+        int right=arr.lenght;
+        sort(left,right,arr);
+
+    }
+
+    public static void sort(int left, int right, int[] arr)
+    {
+        if(left<right)
+        {
+            int mid=(left+right)/2;
+
+            sort(left,mid,arr);
+            sort(mid+1,right,arr); 
+            mergesort(arr,left,mid,right);
+        }
+    }
+
+    public static void mergesort(int[]arr,int left,int mid,int right)
+    {
+        int leftArr[]=new int[mid-left];
+        int rightArr[]=new int[mid-right];
+
+    }
+
+    public static void main(String[] args) {
+      
+        System.out.println("enter array size");
+        Scanner scan= new Scanner(System.in);
+
+        int size=scan.nextInt();
+        int arr[]=new int[size];
+
+        System.out.print("enter array elements");
+        for(int i=0;i<=size-1;i++)
+        {
+            arr[i]=scan.nextInt();
+        }
+        
+        Mainee obj = new Mainee();
+        obj.display(arr);
+        obj.merge(arr);
+
+
+        scan.close();
+    }
+    
+}
