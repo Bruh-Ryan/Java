@@ -11,10 +11,10 @@ public class Mainee {
         System.out.println(" ");
     }
 
-    public int merge(int []arr) // waht i did here is i am just providing variables to sort
+    public void merge(int []arr) // waht i did here is i am just providing variables to sort
     {
         int left=0;
-        int right=arr.lenght;
+        int right=arr.length-1;
         sort(left,right,arr);
 
     }
@@ -33,24 +33,53 @@ public class Mainee {
 
     public static void mergesort(int[]arr,int left,int mid,int right)// here is what the actual merge sort is happening;
     {
-        int leftArr[]=new int[mid-left];// left would be left minus right   
+        int leftsize=mid-left+1;
+        int leftArr[]=new int[leftsize];// left would be left minus right   
     
-        int rightArr[]=new int[right-mid+1];// here is what right minus (mid+1)
+        int rightsize=right-mid;
+        int rightArr[]=new int[rightsize];// here is what right minus (mid+1)
 
-        for(int i=0;i<leftArr.lenght;i++)
+        for(int i=0;i<leftsize;i++)// copying left code to left arr after breaking
         {
             leftArr[i]=leftArr[i+left];
         }
 
-        for(int i=0;i<rightArr.lenght;i++)
+        for(int i=0;i<rightsize;i++)// copying right split after breaking
         {
-            rightArr[i]=rightArr[left-right+1];
+            rightArr[i]=rightArr[mid-right+1];
         }
 
         int i=0; 
         int j=0;
-        int k=0;
-        
+        int k=left;
+        while(i<leftsize && j<rightsize)
+        {
+            if(leftArr[i]<=rightArr[j])
+            {
+                arr[k]=leftArr[j];
+                i++;
+            }
+            else
+            {
+                arr[k]=rightArr[j];
+                j++;
+            }
+            k++;
+                  // Copy remaining elements of leftArr
+        while (i < leftsize) {
+            arr[k] = leftArr[i];
+            i++;
+            k++;
+        }
+
+        // Copy remaining elements of rightArr
+        while (j < rightsize) {
+            arr[k] = rightArr[j];
+            j++;
+            k++;
+        }
+    }
+
 
 
     }
